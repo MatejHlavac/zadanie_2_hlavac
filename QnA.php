@@ -1,3 +1,10 @@
+<?php
+require_once "ota_a_odp.php";
+$qna = new QnA("localhost", "QnA", "root", "");
+$otazky = $qna->nacitajOtazky();
+?>
+
+
 <!DOCTYPE html>
 <html lang="sk">
 <head>
@@ -19,7 +26,7 @@
     <ul class="main-menu" id="main-menu container">
       <li><a href="index.html">Domov</a></li>
       <li><a href="portfolio.php">Portfólio</a></li>
-      <li><a href="qna.html">Q&A</a></li>
+      <li><a href="qna.php">Q&A</a></li>
       <li><a href="kontakt.html">Kontakt</a></li>
     </ul>
     <a class="hamburger" id="hamburger">
@@ -41,20 +48,13 @@
       </div>
     </section>
       <section class="container">
-      <div class="accordion">
-        <div class="question">Otázka 1</div>
-        <div class="answer">Odpoveď 1</div>
-      </div>
-      <div class="accordion">
-        <div class="question">Otázka 2</div>
-        <div class="answer">Odpoveď 2</div>
-      </div>
-      <div class="accordion">
-        <div class="question">Otázka 3</div>
-        <div class="answer">Odpoveď 3</div>
-      </div>
-    </section>
-    </section>
+          <?php foreach ($otazky as $o): ?>
+              <div class="accordion">
+                  <div class="question"><?= htmlspecialchars($o['otazka']) ?></div>
+                  <div class="answer"><?= htmlspecialchars($o['odpoved']) ?></div>
+              </div>
+          <?php endforeach; ?>
+      </section>
   </div>
   </main>
   <footer class="container bg-dark text-white">
